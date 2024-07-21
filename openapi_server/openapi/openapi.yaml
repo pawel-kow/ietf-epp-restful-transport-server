@@ -2644,6 +2644,9 @@ components:
         - command
       example:
         command:
+          extension:
+            secDNS:
+              maxSigLife: 1294386359
           create:
             period:
               '#value': 8
@@ -2734,6 +2737,8 @@ components:
             $ref: '#/components/schemas/domain_checkType'
           minItems: 1
           type: array
+      required:
+      - cd
       type: object
     domain_clIDChgType:
       maxLength: 16
@@ -2953,6 +2958,8 @@ components:
             $ref: '#/components/schemas/eppcom_labelType'
           minItems: 1
           type: array
+      required:
+      - name
       type: object
     domain_nsType:
       oneOf:
@@ -3370,6 +3377,7 @@ components:
           type: array
       required:
       - access
+      - statement
       title: epp_dcpType
       type: object
     epp_eppType:
@@ -3425,6 +3433,8 @@ components:
           minItems: 1
           title: extURI
           type: array
+      required:
+      - extURI
       title: epp_extURIType
       type: object
     epp_greetingType:
@@ -3460,6 +3470,8 @@ components:
           type: array
         svcExtension:
           $ref: '#/components/schemas/epp_extURIType'
+      required:
+      - objURI
       title: epp_loginSvcType
       type: object
     epp_loginType:
@@ -3587,6 +3599,7 @@ components:
         trID:
           $ref: '#/components/schemas/epp_trIDType'
       required:
+      - result
       - trID
       title: epp_responseType
       type: object
@@ -3764,6 +3777,10 @@ components:
           minItems: 1
           title: version
           type: array
+      required:
+      - lang
+      - objURI
+      - version
       title: epp_svcMenuType
       type: object
     epp_trIDStringType:
@@ -3963,6 +3980,8 @@ components:
             $ref: '#/components/schemas/host_checkType'
           minItems: 1
           type: array
+      required:
+      - cd
       type: object
     host_creDataType:
       properties:
@@ -4043,6 +4062,7 @@ components:
       - crID
       - name
       - roid
+      - status
       type: object
     host_ipType:
       enum:
@@ -4056,6 +4076,8 @@ components:
             $ref: '#/components/schemas/eppcom_labelType'
           minItems: 1
           type: array
+      required:
+      - name
       type: object
     host_paNameType:
       properties:
@@ -4146,8 +4168,136 @@ components:
       required:
       - name
       type: object
+    secDNS_chgType:
+      properties:
+        maxSigLife:
+          maximum: 2147483647
+          minimum: 1
+          title: secDNS_maxSigLifeType
+          type: integer
+      title: secDNS_chgType
+      type: object
+    secDNS_dsDataType:
+      properties:
+        alg:
+          title: alg
+          type: integer
+        digest:
+          pattern: "[0-9a-fA-F]+"
+          title: digest
+          type: string
+        digestType:
+          title: digestType
+          type: integer
+        keyData:
+          $ref: '#/components/schemas/secDNS_keyDataType'
+        keyTag:
+          title: keyTag
+          type: integer
+      required:
+      - alg
+      - digest
+      - digestType
+      - keyTag
+      title: secDNS_dsDataType
+      type: object
+    secDNS_dsOrKeyType:
+      allOf:
+      - properties:
+          maxSigLife:
+            $ref: '#/components/schemas/secDNS_maxSigLifeType'
+        type: object
+      - oneOf:
+        - properties:
+            dsData:
+              items:
+                $ref: '#/components/schemas/secDNS_dsDataType'
+              minItems: 1
+              type: array
+          required:
+          - dsData
+          type: object
+        - properties:
+            keyData:
+              items:
+                $ref: '#/components/schemas/secDNS_keyDataType'
+              minItems: 1
+              type: array
+          required:
+          - keyData
+          type: object
+      example:
+        maxSigLife: 1294386359
+      properties:
+        maxSigLife:
+          maximum: 2147483647
+          minimum: 1
+          title: secDNS_maxSigLifeType
+          type: integer
+      title: secDNS_dsOrKeyType
+      type: object
+    secDNS_keyDataType:
+      properties:
+        alg:
+          title: alg
+          type: integer
+        flags:
+          title: flags
+          type: integer
+        protocol:
+          title: protocol
+          type: integer
+        pubKey:
+          minLength: 1
+          title: secDNS_keyType
+          type: string
+      required:
+      - alg
+      - flags
+      - protocol
+      - pubKey
+      title: secDNS_keyDataType
+      type: object
+    secDNS_keyType:
+      minLength: 1
+      title: secDNS_keyType
+      type: string
+    secDNS_maxSigLifeType:
+      maximum: 2147483647
+      minimum: 1
+      title: secDNS_maxSigLifeType
+      type: integer
+    secDNS_remType:
+      oneOf:
+      - $ref: '#/components/schemas/secDNS_remType_oneOf'
+      - $ref: '#/components/schemas/secDNS_remType_oneOf_1'
+      - $ref: '#/components/schemas/secDNS_remType_oneOf_2'
+      title: secDNS_remType
+    secDNS_updateType:
+      properties:
+        '@urgent':
+          type: boolean
+        add:
+          $ref: '#/components/schemas/secDNS_dsOrKeyType'
+        chg:
+          $ref: '#/components/schemas/secDNS_chgType'
+        rem:
+          $ref: '#/components/schemas/secDNS_remType'
+      type: object
+    DomainCreateRequest_allOf_command_extension:
+      example:
+        secDNS:
+          maxSigLife: 1294386359
+      properties:
+        secDNS:
+          $ref: '#/components/schemas/secDNS_dsOrKeyType'
+      title: DomainCreateRequest_allOf_command_extension
+      type: object
     DomainCreateRequest_allOf_command:
       example:
+        extension:
+          secDNS:
+            maxSigLife: 1294386359
         create:
           period:
             '#value': 8
@@ -4170,6 +4320,8 @@ components:
       properties:
         create:
           $ref: '#/components/schemas/domain_createType'
+        extension:
+          $ref: '#/components/schemas/DomainCreateRequest_allOf_command_extension'
       required:
       - create
       title: DomainCreateRequest_allOf_command
@@ -4216,6 +4368,8 @@ components:
           minItems: 1
           title: hostObj
           type: array
+      required:
+      - hostObj
       title: domain_nsType_oneOf
       type: object
     domain_nsType_oneOf_1:
@@ -4226,6 +4380,8 @@ components:
           minItems: 1
           title: hostAttr
           type: array
+      required:
+      - hostAttr
       title: domain_nsType_oneOf_1
       type: object
     epp_dcpAccessType_oneOf:
@@ -4379,4 +4535,37 @@ components:
       required:
       - extension
       title: epp_eppType_oneOf_4
+      type: object
+    secDNS_remType_oneOf:
+      properties:
+        all:
+          title: all
+          type: boolean
+      required:
+      - all
+      title: secDNS_remType_oneOf
+      type: object
+    secDNS_remType_oneOf_1:
+      properties:
+        dsData:
+          items:
+            $ref: '#/components/schemas/secDNS_dsDataType'
+          minItems: 1
+          title: dsData
+          type: array
+      required:
+      - dsData
+      title: secDNS_remType_oneOf_1
+      type: object
+    secDNS_remType_oneOf_2:
+      properties:
+        keyData:
+          items:
+            $ref: '#/components/schemas/secDNS_keyDataType'
+          minItems: 1
+          title: keyData
+          type: array
+      required:
+      - keyData
+      title: secDNS_remType_oneOf_2
       type: object

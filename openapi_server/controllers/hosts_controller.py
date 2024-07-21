@@ -40,6 +40,16 @@ def hosts_id_delete(id, ):  # noqa: E501
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
 
 
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return hosts_impl.hosts_id_delete(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, body)
     except NameError as e:
@@ -79,6 +89,18 @@ def hosts_id_get(id, filter=None, val=None, ):  # noqa: E501
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
 
 
+
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return hosts_impl.hosts_id_get(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, filter, val, body)
     except NameError as e:
@@ -112,6 +134,16 @@ def hosts_id_head(id, ):  # noqa: E501
     repp_svcs = request.headers.get('repp_svcs')
     accept_language = request.headers.get('accept_language')
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
+
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
 
 
     try:
@@ -149,6 +181,16 @@ def hosts_id_patch(id, ):  # noqa: E501
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
 
 
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
+
     try:
         return hosts_impl.hosts_id_patch(repp_cltrid, repp_svcs, accept_language, id, body, repp_svcs_ext)
     except NameError as e:
@@ -180,6 +222,15 @@ def hosts_post():  # noqa: E501
     repp_svcs = request.headers.get('repp_svcs')
     accept_language = request.headers.get('accept_language')
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
 
 
     try:

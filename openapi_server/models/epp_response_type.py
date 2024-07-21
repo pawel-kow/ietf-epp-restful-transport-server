@@ -148,6 +148,8 @@ class EppResponseType(Model):
         :param result: The result of this EppResponseType.
         :type result: List[EppResultType]
         """
+        if result is None:
+            raise ValueError("Invalid value for `result`, must not be `None`")  # noqa: E501
         if result is not None and len(result) < 1:
             raise ValueError("Invalid value for `result`, number of items must be greater than or equal to `1`")  # noqa: E501
 

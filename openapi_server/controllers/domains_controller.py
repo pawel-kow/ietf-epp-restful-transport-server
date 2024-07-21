@@ -41,6 +41,16 @@ def domains_id_delete(id, ):  # noqa: E501
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
 
 
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return domains_impl.domains_id_delete(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, body)
     except NameError as e:
@@ -86,6 +96,20 @@ def domains_id_get(id, filter=None, val=None, ):  # noqa: E501
     repp_roid = request.headers.get('repp_roid')
 
 
+
+
+
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return domains_impl.domains_id_get(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, repp_auth_info, repp_roid, filter, val, body)
     except NameError as e:
@@ -121,6 +145,16 @@ def domains_id_head(id, ):  # noqa: E501
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
 
 
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return domains_impl.domains_id_head(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, body)
     except NameError as e:
@@ -154,6 +188,16 @@ def domains_id_patch(id, ):  # noqa: E501
     repp_svcs = request.headers.get('repp_svcs')
     accept_language = request.headers.get('accept_language')
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
 
 
     try:
@@ -197,6 +241,19 @@ def domains_id_renewals_post(id, unit=None, value=None, current_date=None, ):  #
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
 
 
+
+
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return domains_impl.domains_id_renewals_post(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, unit, value, current_date, body)
     except NameError as e:
@@ -230,6 +287,16 @@ def domains_id_transfers_latest_delete(id, ):  # noqa: E501
     repp_svcs = request.headers.get('repp_svcs')
     accept_language = request.headers.get('accept_language')
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
+
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
 
 
     try:
@@ -273,6 +340,18 @@ def domains_id_transfers_latest_get(id, ):  # noqa: E501
     repp_roid = request.headers.get('repp_roid')
 
 
+
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return domains_impl.domains_id_transfers_latest_get(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, repp_auth_info, repp_roid, body)
     except NameError as e:
@@ -306,6 +385,16 @@ def domains_id_transfers_latest_put(id, ):  # noqa: E501
     repp_svcs = request.headers.get('repp_svcs')
     accept_language = request.headers.get('accept_language')
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
+
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
 
 
     try:
@@ -353,6 +442,20 @@ def domains_id_transfers_post(id, unit=None, value=None, ):  # noqa: E501
     repp_roid = request.headers.get('repp_roid')
 
 
+
+
+
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return domains_impl.domains_id_transfers_post(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, repp_auth_info, repp_roid, unit, value, body)
     except NameError as e:
@@ -385,8 +488,15 @@ def domains_post():  # noqa: E501
     accept_language = request.headers.get('accept_language')
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
 
+
+
+
     if connexion.request.is_json:
+        # deserialization happens here
         domain_create_request = DomainCreateRequest.from_dict(connexion.request.get_json())  # noqa: E501
+
+
+
 
     try:
         return domains_impl.domains_post(repp_cltrid, repp_svcs, accept_language, domain_create_request, repp_svcs_ext)

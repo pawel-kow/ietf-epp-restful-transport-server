@@ -117,6 +117,8 @@ class EppDcpType(Model):
         :param statement: The statement of this EppDcpType.
         :type statement: List[EppDcpStatementType]
         """
+        if statement is None:
+            raise ValueError("Invalid value for `statement`, must not be `None`")  # noqa: E501
         if statement is not None and len(statement) < 1:
             raise ValueError("Invalid value for `statement`, number of items must be greater than or equal to `1`")  # noqa: E501
 

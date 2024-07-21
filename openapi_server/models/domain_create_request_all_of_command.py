@@ -3,9 +3,11 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from openapi_server.models.base_model import Model
+from openapi_server.models.domain_create_request_all_of_command_extension import DomainCreateRequestAllOfCommandExtension
 from openapi_server.models.domain_create_type import DomainCreateType
 from openapi_server import util
 
+from openapi_server.models.domain_create_request_all_of_command_extension import DomainCreateRequestAllOfCommandExtension  # noqa: E501
 from openapi_server.models.domain_create_type import DomainCreateType  # noqa: E501
 
 class DomainCreateRequestAllOfCommand(Model):
@@ -14,21 +16,26 @@ class DomainCreateRequestAllOfCommand(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, create=None):  # noqa: E501
+    def __init__(self, create=None, extension=None):  # noqa: E501
         """DomainCreateRequestAllOfCommand - a model defined in OpenAPI
 
         :param create: The create of this DomainCreateRequestAllOfCommand.  # noqa: E501
         :type create: DomainCreateType
+        :param extension: The extension of this DomainCreateRequestAllOfCommand.  # noqa: E501
+        :type extension: DomainCreateRequestAllOfCommandExtension
         """
         self.openapi_types = {
-            'create': DomainCreateType
+            'create': DomainCreateType,
+            'extension': DomainCreateRequestAllOfCommandExtension
         }
 
         self.attribute_map = {
-            'create': 'create'
+            'create': 'create',
+            'extension': 'extension'
         }
 
         self._create = create
+        self._extension = extension
 
     @classmethod
     def from_dict(cls, dikt) -> 'DomainCreateRequestAllOfCommand':
@@ -63,3 +70,24 @@ class DomainCreateRequestAllOfCommand(Model):
             raise ValueError("Invalid value for `create`, must not be `None`")  # noqa: E501
 
         self._create = create
+
+    @property
+    def extension(self) -> DomainCreateRequestAllOfCommandExtension:
+        """Gets the extension of this DomainCreateRequestAllOfCommand.
+
+
+        :return: The extension of this DomainCreateRequestAllOfCommand.
+        :rtype: DomainCreateRequestAllOfCommandExtension
+        """
+        return self._extension
+
+    @extension.setter
+    def extension(self, extension: DomainCreateRequestAllOfCommandExtension):
+        """Sets the extension of this DomainCreateRequestAllOfCommand.
+
+
+        :param extension: The extension of this DomainCreateRequestAllOfCommand.
+        :type extension: DomainCreateRequestAllOfCommandExtension
+        """
+
+        self._extension = extension

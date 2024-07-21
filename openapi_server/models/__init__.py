@@ -15,6 +15,7 @@ from openapi_server.models.domain_contact_type import DomainContactType
 from openapi_server.models.domain_cre_data_type import DomainCreDataType
 from openapi_server.models.domain_create_request import DomainCreateRequest
 from openapi_server.models.domain_create_request_all_of_command import DomainCreateRequestAllOfCommand
+from openapi_server.models.domain_create_request_all_of_command_extension import DomainCreateRequestAllOfCommandExtension
 from openapi_server.models.domain_create_type import DomainCreateType
 from openapi_server.models.domain_host_attr_type import DomainHostAttrType
 from openapi_server.models.domain_hosts_type import DomainHostsType
@@ -106,3 +107,12 @@ from openapi_server.models.host_s_name_type import HostSNameType
 from openapi_server.models.host_status_type import HostStatusType
 from openapi_server.models.host_status_value_type import HostStatusValueType
 from openapi_server.models.host_update_type import HostUpdateType
+from openapi_server.models.sec_dns_chg_type import SecDNSChgType
+from openapi_server.models.sec_dnsds_data_type import SecDNSDsDataType
+from openapi_server.models.sec_dnsds_or_key_type import SecDNSDsOrKeyType
+from openapi_server.models.sec_dns_key_data_type import SecDNSKeyDataType
+from openapi_server.models.sec_dns_rem_type import SecDNSRemType
+from openapi_server.models.sec_dns_rem_type_one_of import SecDNSRemTypeOneOf
+from openapi_server.models.sec_dns_rem_type_one_of1 import SecDNSRemTypeOneOf1
+from openapi_server.models.sec_dns_rem_type_one_of2 import SecDNSRemTypeOneOf2
+from openapi_server.models.sec_dns_update_type import SecDNSUpdateType

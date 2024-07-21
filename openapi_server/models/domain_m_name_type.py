@@ -57,6 +57,8 @@ class DomainMNameType(Model):
         :param name: The name of this DomainMNameType.
         :type name: List[str]
         """
+        if name is None:
+            raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
         if name is not None and len(name) < 1:
             raise ValueError("Invalid value for `name`, number of items must be greater than or equal to `1`")  # noqa: E501
 

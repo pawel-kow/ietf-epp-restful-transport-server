@@ -57,6 +57,8 @@ class DomainNsTypeOneOf(Model):
         :param host_obj: The host_obj of this DomainNsTypeOneOf.
         :type host_obj: List[str]
         """
+        if host_obj is None:
+            raise ValueError("Invalid value for `host_obj`, must not be `None`")  # noqa: E501
         if host_obj is not None and len(host_obj) < 1:
             raise ValueError("Invalid value for `host_obj`, number of items must be greater than or equal to `1`")  # noqa: E501
 

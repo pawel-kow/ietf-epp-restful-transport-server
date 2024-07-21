@@ -57,6 +57,8 @@ class EppExtURIType(Model):
         :param ext_uri: The ext_uri of this EppExtURIType.
         :type ext_uri: List[str]
         """
+        if ext_uri is None:
+            raise ValueError("Invalid value for `ext_uri`, must not be `None`")  # noqa: E501
         if ext_uri is not None and len(ext_uri) < 1:
             raise ValueError("Invalid value for `ext_uri`, number of items must be greater than or equal to `1`")  # noqa: E501
 

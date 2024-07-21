@@ -76,6 +76,8 @@ class EppSvcMenuType(Model):
         :param lang: The lang of this EppSvcMenuType.
         :type lang: List[str]
         """
+        if lang is None:
+            raise ValueError("Invalid value for `lang`, must not be `None`")  # noqa: E501
         if lang is not None and len(lang) < 1:
             raise ValueError("Invalid value for `lang`, number of items must be greater than or equal to `1`")  # noqa: E501
 
@@ -99,6 +101,8 @@ class EppSvcMenuType(Model):
         :param obj_uri: The obj_uri of this EppSvcMenuType.
         :type obj_uri: List[str]
         """
+        if obj_uri is None:
+            raise ValueError("Invalid value for `obj_uri`, must not be `None`")  # noqa: E501
         if obj_uri is not None and len(obj_uri) < 1:
             raise ValueError("Invalid value for `obj_uri`, number of items must be greater than or equal to `1`")  # noqa: E501
 
@@ -143,6 +147,8 @@ class EppSvcMenuType(Model):
         :param version: The version of this EppSvcMenuType.
         :type version: List[EppVersionType]
         """
+        if version is None:
+            raise ValueError("Invalid value for `version`, must not be `None`")  # noqa: E501
         if version is not None and len(version) < 1:
             raise ValueError("Invalid value for `version`, number of items must be greater than or equal to `1`")  # noqa: E501
 

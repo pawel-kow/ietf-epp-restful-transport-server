@@ -59,6 +59,8 @@ class DomainChkDataType(Model):
         :param cd: The cd of this DomainChkDataType.
         :type cd: List[DomainCheckType]
         """
+        if cd is None:
+            raise ValueError("Invalid value for `cd`, must not be `None`")  # noqa: E501
         if cd is not None and len(cd) < 1:
             raise ValueError("Invalid value for `cd`, number of items must be greater than or equal to `1`")  # noqa: E501
 

@@ -59,6 +59,8 @@ class DomainNsTypeOneOf1(Model):
         :param host_attr: The host_attr of this DomainNsTypeOneOf1.
         :type host_attr: List[DomainHostAttrType]
         """
+        if host_attr is None:
+            raise ValueError("Invalid value for `host_attr`, must not be `None`")  # noqa: E501
         if host_attr is not None and len(host_attr) < 1:
             raise ValueError("Invalid value for `host_attr`, number of items must be greater than or equal to `1`")  # noqa: E501
 

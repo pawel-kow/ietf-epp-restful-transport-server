@@ -256,6 +256,8 @@ class HostInfDataType(Model):
         :param status: The status of this HostInfDataType.
         :type status: List[HostStatusType]
         """
+        if status is None:
+            raise ValueError("Invalid value for `status`, must not be `None`")  # noqa: E501
         if status is not None and len(status) > 7:
             raise ValueError("Invalid value for `status`, number of items must be less than or equal to `7`")  # noqa: E501
         if status is not None and len(status) < 1:

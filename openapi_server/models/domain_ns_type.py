@@ -68,6 +68,8 @@ class DomainNsType(Model):
         :param host_obj: The host_obj of this DomainNsType.
         :type host_obj: List[str]
         """
+        if host_obj is None:
+            raise ValueError("Invalid value for `host_obj`, must not be `None`")  # noqa: E501
         if host_obj is not None and len(host_obj) < 1:
             raise ValueError("Invalid value for `host_obj`, number of items must be greater than or equal to `1`")  # noqa: E501
 
@@ -91,6 +93,8 @@ class DomainNsType(Model):
         :param host_attr: The host_attr of this DomainNsType.
         :type host_attr: List[DomainHostAttrType]
         """
+        if host_attr is None:
+            raise ValueError("Invalid value for `host_attr`, must not be `None`")  # noqa: E501
         if host_attr is not None and len(host_attr) < 1:
             raise ValueError("Invalid value for `host_attr`, number of items must be greater than or equal to `1`")  # noqa: E501
 

@@ -38,6 +38,15 @@ def messages_get():  # noqa: E501
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
 
 
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return common_impl.messages_get(repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, body)
     except NameError as e:
@@ -73,6 +82,16 @@ def messages_id_head(id, ):  # noqa: E501
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
 
 
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return common_impl.messages_id_head(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, body)
     except NameError as e:
@@ -93,6 +112,8 @@ def root_get():  # noqa: E501
     """
 
     accept_language = request.headers.get('accept_language')
+
+
 
 
     try:

@@ -40,6 +40,16 @@ def contacts_id_delete(id, ):  # noqa: E501
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
 
 
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return contacts_impl.contacts_id_delete(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, body)
     except NameError as e:
@@ -85,6 +95,20 @@ def contacts_id_get(id, filter=None, val=None, ):  # noqa: E501
     repp_roid = request.headers.get('repp_roid')
 
 
+
+
+
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return contacts_impl.contacts_id_get(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, repp_auth_info, repp_roid, filter, val, body)
     except NameError as e:
@@ -120,6 +144,16 @@ def contacts_id_head(id, ):  # noqa: E501
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
 
 
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return contacts_impl.contacts_id_head(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, body)
     except NameError as e:
@@ -153,6 +187,16 @@ def contacts_id_patch(id, ):  # noqa: E501
     repp_svcs = request.headers.get('repp_svcs')
     accept_language = request.headers.get('accept_language')
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
 
 
     try:
@@ -196,6 +240,18 @@ def contacts_id_transfers_latest_delete(id, ):  # noqa: E501
     repp_roid = request.headers.get('repp_roid')
 
 
+
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return contacts_impl.contacts_id_transfers_latest_delete(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, repp_auth_info, repp_roid, body)
     except NameError as e:
@@ -235,6 +291,18 @@ def contacts_id_transfers_latest_get(id, ):  # noqa: E501
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
     repp_auth_info = request.headers.get('repp_auth_info')
     repp_roid = request.headers.get('repp_roid')
+
+
+
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
 
 
     try:
@@ -278,6 +346,18 @@ def contacts_id_transfers_latest_put(id, ):  # noqa: E501
     repp_roid = request.headers.get('repp_roid')
 
 
+
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return contacts_impl.contacts_id_transfers_latest_put(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, repp_auth_info, repp_roid, body)
     except NameError as e:
@@ -319,6 +399,18 @@ def contacts_id_transfers_post(id, ):  # noqa: E501
     repp_roid = request.headers.get('repp_roid')
 
 
+
+
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
+
     try:
         return contacts_impl.contacts_id_transfers_post(id, repp_cltrid, repp_svcs, accept_language, repp_svcs_ext, repp_auth_info, repp_roid, body)
     except NameError as e:
@@ -350,6 +442,15 @@ def contacts_post():  # noqa: E501
     repp_svcs = request.headers.get('repp_svcs')
     accept_language = request.headers.get('accept_language')
     repp_svcs_ext = request.headers.get('repp_svcs_ext')
+
+
+
+
+    body = None
+    if connexion.request.is_json:
+        body = connexion.request.get_json()
+
+
 
 
     try:

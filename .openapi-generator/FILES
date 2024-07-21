@@ -30,6 +30,7 @@ openapi_server/models/domain_contact_type.py
 openapi_server/models/domain_cre_data_type.py
 openapi_server/models/domain_create_request.py
 openapi_server/models/domain_create_request_all_of_command.py
+openapi_server/models/domain_create_request_all_of_command_extension.py
 openapi_server/models/domain_create_type.py
 openapi_server/models/domain_host_attr_type.py
 openapi_server/models/domain_hosts_type.py
@@ -121,6 +122,15 @@ openapi_server/models/host_s_name_type.py
 openapi_server/models/host_status_type.py
 openapi_server/models/host_status_value_type.py
 openapi_server/models/host_update_type.py
+openapi_server/models/sec_dns_chg_type.py
+openapi_server/models/sec_dns_key_data_type.py
+openapi_server/models/sec_dns_rem_type.py
+openapi_server/models/sec_dns_rem_type_one_of.py
+openapi_server/models/sec_dns_rem_type_one_of1.py
+openapi_server/models/sec_dns_rem_type_one_of2.py
+openapi_server/models/sec_dns_update_type.py
+openapi_server/models/sec_dnsds_data_type.py
+openapi_server/models/sec_dnsds_or_key_type.py
 openapi_server/openapi/openapi.yaml
 openapi_server/test/__init__.py
 openapi_server/typing_utils.py

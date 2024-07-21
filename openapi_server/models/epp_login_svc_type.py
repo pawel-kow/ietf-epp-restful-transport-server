@@ -64,6 +64,8 @@ class EppLoginSvcType(Model):
         :param obj_uri: The obj_uri of this EppLoginSvcType.
         :type obj_uri: List[str]
         """
+        if obj_uri is None:
+            raise ValueError("Invalid value for `obj_uri`, must not be `None`")  # noqa: E501
         if obj_uri is not None and len(obj_uri) < 1:
             raise ValueError("Invalid value for `obj_uri`, number of items must be greater than or equal to `1`")  # noqa: E501
 
