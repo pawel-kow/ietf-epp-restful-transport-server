@@ -1,0 +1,4382 @@
+openapi: 3.0.2
+info:
+  title: RESTful EPP
+  version: "1.0"
+servers:
+- url: http://localhost:8080/repp/v1/
+paths:
+  /:
+    get:
+      operationId: root_get
+      parameters:
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Hello
+      tags:
+      - common
+      x-openapi-router-controller: openapi_server.controllers.common_controller
+  /contacts:
+    post:
+      operationId: contacts_post
+      parameters:
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Contact create
+      tags:
+      - contacts
+      x-openapi-router-controller: openapi_server.controllers.contacts_controller
+  /contacts/{id}:
+    delete:
+      operationId: contacts_id_delete
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Contact delete
+      tags:
+      - contacts
+      x-openapi-router-controller: openapi_server.controllers.contacts_controller
+    get:
+      operationId: contacts_id_get
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Object authorization details
+        explode: false
+        in: header
+        name: REPP-authInfo
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Object linked to authorization
+        explode: false
+        in: header
+        name: REPP-Roid
+        required: false
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: val
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Contact info
+      tags:
+      - contacts
+      x-openapi-router-controller: openapi_server.controllers.contacts_controller
+    head:
+      operationId: contacts_id_head
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          description: OK
+          headers:
+            REPP-Check-Avail:
+              $ref: '#/components/headers/check-avail'
+            REPP-Check-Reason:
+              $ref: '#/components/headers/check-reason'
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Contact check
+      tags:
+      - contacts
+      x-openapi-router-controller: openapi_server.controllers.contacts_controller
+    patch:
+      operationId: contacts_id_patch
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Contact update
+      tags:
+      - contacts
+      x-openapi-router-controller: openapi_server.controllers.contacts_controller
+  /contacts/{id}/transfers:
+    post:
+      operationId: contacts_id_transfers_post
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Object authorization details
+        explode: false
+        in: header
+        name: REPP-authInfo
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Object linked to authorization
+        explode: false
+        in: header
+        name: REPP-Roid
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Contact transfer request
+      tags:
+      - contacts
+      x-openapi-router-controller: openapi_server.controllers.contacts_controller
+  /contacts/{id}/transfers/latest:
+    delete:
+      operationId: contacts_id_transfers_latest_delete
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Object authorization details
+        explode: false
+        in: header
+        name: REPP-authInfo
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Object linked to authorization
+        explode: false
+        in: header
+        name: REPP-Roid
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Contact transfer cancel
+      tags:
+      - contacts
+      x-openapi-router-controller: openapi_server.controllers.contacts_controller
+    get:
+      operationId: contacts_id_transfers_latest_get
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Object authorization details
+        explode: false
+        in: header
+        name: REPP-authInfo
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Object linked to authorization
+        explode: false
+        in: header
+        name: REPP-Roid
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Contact transfer query
+      tags:
+      - contacts
+      x-openapi-router-controller: openapi_server.controllers.contacts_controller
+    put:
+      operationId: contacts_id_transfers_latest_put
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Object authorization details
+        explode: false
+        in: header
+        name: REPP-authInfo
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Object linked to authorization
+        explode: false
+        in: header
+        name: REPP-Roid
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Contact transfer approve
+      tags:
+      - contacts
+      x-openapi-router-controller: openapi_server.controllers.contacts_controller
+  /domains:
+    post:
+      operationId: domains_post
+      parameters:
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainCreateRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Domain create
+      tags:
+      - domains
+      x-openapi-router-controller: openapi_server.controllers.domains_controller
+  /domains/{id}:
+    delete:
+      operationId: domains_id_delete
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Domain delete
+      tags:
+      - domains
+      x-openapi-router-controller: openapi_server.controllers.domains_controller
+    get:
+      operationId: domains_id_get
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Object authorization details
+        explode: false
+        in: header
+        name: REPP-authInfo
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Object linked to authorization
+        explode: false
+        in: header
+        name: REPP-Roid
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Name of attibute to filter on
+        explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Value to use for filter
+        explode: true
+        in: query
+        name: val
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "422":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Domain info
+      tags:
+      - domains
+      x-openapi-router-controller: openapi_server.controllers.domains_controller
+    head:
+      operationId: domains_id_head
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          description: OK
+          headers:
+            REPP-Check-Avail:
+              $ref: '#/components/headers/check-avail'
+            REPP-Check-Reason:
+              $ref: '#/components/headers/check-reason'
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "422":
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Domain check
+      tags:
+      - domains
+      x-openapi-router-controller: openapi_server.controllers.domains_controller
+    patch:
+      operationId: domains_id_patch
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Domain update
+      tags:
+      - domains
+      x-openapi-router-controller: openapi_server.controllers.domains_controller
+  /domains/{id}/renewals:
+    post:
+      operationId: domains_id_renewals_post
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Unit used for renewal value (e.g. y for year)
+        example: "y"
+        explode: true
+        in: query
+        name: unit
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Value for renewal
+        example: 1
+        explode: true
+        in: query
+        name: value
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Date on which the current validity period ends
+        example: 2023-12-01
+        explode: true
+        in: query
+        name: current-date
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Domain renew
+      tags:
+      - domains
+      x-openapi-router-controller: openapi_server.controllers.domains_controller
+  /domains/{id}/transfers:
+    post:
+      operationId: domains_id_transfers_post
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Object authorization details
+        explode: false
+        in: header
+        name: REPP-authInfo
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Object linked to authorization
+        explode: false
+        in: header
+        name: REPP-Roid
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Unit used for renewal value (e.g. y for year)
+        example: "y"
+        explode: true
+        in: query
+        name: unit
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Value for renewal
+        example: 1
+        explode: true
+        in: query
+        name: value
+        required: false
+        schema:
+          type: integer
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Domain transfer request
+      tags:
+      - domains
+      x-openapi-router-controller: openapi_server.controllers.domains_controller
+  /domains/{id}/transfers/latest:
+    delete:
+      operationId: domains_id_transfers_latest_delete
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Domain transfer cancel
+      tags:
+      - domains
+      x-openapi-router-controller: openapi_server.controllers.domains_controller
+    get:
+      operationId: domains_id_transfers_latest_get
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Object authorization details
+        explode: false
+        in: header
+        name: REPP-authInfo
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Object linked to authorization
+        explode: false
+        in: header
+        name: REPP-Roid
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Domain transfer query
+      tags:
+      - domains
+      x-openapi-router-controller: openapi_server.controllers.domains_controller
+    put:
+      operationId: domains_id_transfers_latest_put
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Domain transfer approve
+      tags:
+      - domains
+      x-openapi-router-controller: openapi_server.controllers.domains_controller
+  /hosts:
+    post:
+      operationId: hosts_post
+      parameters:
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Host create
+      tags:
+      - hosts
+      x-openapi-router-controller: openapi_server.controllers.hosts_controller
+  /hosts/{id}:
+    delete:
+      operationId: hosts_id_delete
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Host delete
+      tags:
+      - hosts
+      x-openapi-router-controller: openapi_server.controllers.hosts_controller
+    get:
+      operationId: hosts_id_get
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: val
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Host info
+      tags:
+      - hosts
+      x-openapi-router-controller: openapi_server.controllers.hosts_controller
+    head:
+      operationId: hosts_id_head
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          description: OK
+          headers:
+            REPP-Check-Avail:
+              $ref: '#/components/headers/check-avail'
+            REPP-Check-Reason:
+              $ref: '#/components/headers/check-reason'
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Host check
+      tags:
+      - hosts
+      x-openapi-router-controller: openapi_server.controllers.hosts_controller
+    patch:
+      operationId: hosts_id_patch
+      parameters:
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Host update
+      tags:
+      - hosts
+      x-openapi-router-controller: openapi_server.controllers.hosts_controller
+  /messages:
+    get:
+      operationId: messages_get
+      parameters:
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: OK
+          headers:
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          content:
+            application/epp+json:
+              schema:
+                type: string
+            application/epp+xml:
+              schema:
+                type: string
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Poll request
+      tags:
+      - common
+      x-openapi-router-controller: openapi_server.controllers.common_controller
+  /messages/{id}:
+    head:
+      operationId: messages_id_head
+      parameters:
+      - description: Object identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Client transaction identifier
+        explode: false
+        in: header
+        name: REPP-cltrid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Namespace used
+        explode: false
+        in: header
+        name: REPP-svcs
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Extension namespace used
+        explode: false
+        in: header
+        name: REPP-svcs-ext
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Language used for response
+        explode: false
+        in: header
+        name: Accept-Language
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/defaultOptionalRequestBody'
+      responses:
+        "200":
+          description: OK
+          headers:
+            REPP-Check-Avail:
+              $ref: '#/components/headers/check-avail'
+            REPP-Check-Reason:
+              $ref: '#/components/headers/check-reason'
+            REPP-Queue-Size:
+              $ref: '#/components/headers/queue-size'
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+        "224":
+          description: Unprocessable Content
+          headers:
+            REPP-cltrid:
+              $ref: '#/components/headers/cltrid'
+            REPP-eppcode:
+              $ref: '#/components/headers/eppcode'
+            REPP-svtrid:
+              $ref: '#/components/headers/svtrid'
+      summary: Poll ack
+      tags:
+      - common
+      x-openapi-router-controller: openapi_server.controllers.common_controller
+components:
+  headers:
+    check-avail:
+      description: Result of object check
+      explode: false
+      required: true
+      schema:
+        type: integer
+      style: simple
+    check-reason:
+      description: Explanation why object cannot be provisioned
+      explode: false
+      required: false
+      schema:
+        type: integer
+      style: simple
+    cltrid:
+      description: Client transaction identifier
+      explode: false
+      required: false
+      schema:
+        type: string
+      style: simple
+    eppcode:
+      description: EPP result code
+      explode: false
+      required: false
+      schema:
+        type: integer
+      style: simple
+    queue-size:
+      description: Number of messages in the queue
+      explode: false
+      required: false
+      schema:
+        type: integer
+      style: simple
+    svtrid:
+      description: Server transaction identifier
+      explode: false
+      required: false
+      schema:
+        type: string
+      style: simple
+  parameters:
+    p_acceptLanguage:
+      description: Language used for response
+      explode: false
+      in: header
+      name: Accept-Language
+      required: true
+      schema:
+        type: string
+      style: simple
+    p_authinfo:
+      description: Object authorization details
+      explode: false
+      in: header
+      name: REPP-authInfo
+      required: false
+      schema:
+        type: string
+      style: simple
+    p_cltrid:
+      description: Client transaction identifier
+      explode: false
+      in: header
+      name: REPP-cltrid
+      required: true
+      schema:
+        type: string
+      style: simple
+    p_filter_name:
+      description: Name of attibute to filter on
+      explode: true
+      in: query
+      name: filter
+      required: false
+      schema:
+        type: string
+      style: form
+    p_filter_val:
+      description: Value to use for filter
+      explode: true
+      in: query
+      name: val
+      required: false
+      schema:
+        type: string
+      style: form
+    p_id:
+      description: Object identifier
+      explode: false
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+      style: simple
+    p_renewal_current_date:
+      description: Date on which the current validity period ends
+      example: 2023-12-01
+      explode: true
+      in: query
+      name: current-date
+      required: false
+      schema:
+        type: string
+      style: form
+    p_renewal_unit:
+      description: Unit used for renewal value (e.g. y for year)
+      example: "y"
+      explode: true
+      in: query
+      name: unit
+      required: false
+      schema:
+        type: string
+      style: form
+    p_renewal_value:
+      description: Value for renewal
+      example: 1
+      explode: true
+      in: query
+      name: value
+      required: false
+      schema:
+        type: integer
+      style: form
+    p_roid:
+      description: Object linked to authorization
+      explode: false
+      in: header
+      name: REPP-Roid
+      required: false
+      schema:
+        type: string
+      style: simple
+    p_svcs:
+      description: Namespace used
+      explode: false
+      in: header
+      name: REPP-svcs
+      required: true
+      schema:
+        type: string
+      style: simple
+    p_svcs-ext:
+      description: Extension namespace used
+      explode: false
+      in: header
+      name: REPP-svcs-ext
+      required: false
+      schema:
+        type: string
+      style: simple
+  requestBodies:
+    defaultOptionalRequestBody:
+      content:
+        application/epp+json:
+          schema:
+            type: string
+        application/epp+xml:
+          schema:
+            type: string
+      description: Default request body for XML of JSON message
+      required: false
+    defaultRequestBody:
+      content:
+        application/epp+json:
+          schema:
+            type: string
+        application/epp+xml:
+          schema:
+            type: string
+      description: Default request body for XML of JSON message
+      required: true
+  responses:
+    "200okCheckNoBody":
+      description: OK
+      headers:
+        REPP-Check-Avail:
+          $ref: '#/components/headers/check-avail'
+        REPP-Check-Reason:
+          $ref: '#/components/headers/check-reason'
+        REPP-Queue-Size:
+          $ref: '#/components/headers/queue-size'
+        REPP-cltrid:
+          $ref: '#/components/headers/cltrid'
+        REPP-eppcode:
+          $ref: '#/components/headers/eppcode'
+        REPP-svtrid:
+          $ref: '#/components/headers/svtrid'
+    "200okNoBody":
+      description: OK
+      headers:
+        REPP-Queue-Size:
+          $ref: '#/components/headers/queue-size'
+        REPP-cltrid:
+          $ref: '#/components/headers/cltrid'
+        REPP-eppcode:
+          $ref: '#/components/headers/eppcode'
+        REPP-svtrid:
+          $ref: '#/components/headers/svtrid'
+    "200okWithBody":
+      content:
+        application/epp+json:
+          schema:
+            type: string
+        application/epp+xml:
+          schema:
+            type: string
+      description: OK
+      headers:
+        REPP-Queue-Size:
+          $ref: '#/components/headers/queue-size'
+        REPP-cltrid:
+          $ref: '#/components/headers/cltrid'
+        REPP-eppcode:
+          $ref: '#/components/headers/eppcode'
+        REPP-svtrid:
+          $ref: '#/components/headers/svtrid'
+    "422ErrorBody":
+      content:
+        application/epp+json:
+          schema:
+            type: string
+        application/epp+xml:
+          schema:
+            type: string
+      description: Unprocessable Content
+      headers:
+        REPP-cltrid:
+          $ref: '#/components/headers/cltrid'
+        REPP-eppcode:
+          $ref: '#/components/headers/eppcode'
+        REPP-svtrid:
+          $ref: '#/components/headers/svtrid'
+    "422ErrorNoBody":
+      description: Unprocessable Content
+      headers:
+        REPP-cltrid:
+          $ref: '#/components/headers/cltrid'
+        REPP-eppcode:
+          $ref: '#/components/headers/eppcode'
+        REPP-svtrid:
+          $ref: '#/components/headers/svtrid'
+  schemas:
+    DomainCreateRequest:
+      allOf:
+      - $ref: '#/components/schemas/epp_eppType'
+      - properties:
+          command:
+            $ref: '#/components/schemas/DomainCreateRequest_allOf_command'
+        required:
+        - command
+      example:
+        command:
+          create:
+            period:
+              '#value': 8
+              '@unit': "y"
+            ns:
+              hostObj:
+              - null
+              - null
+            contact:
+            - '@type': admin
+              '#value': '#value'
+            - '@type': admin
+              '#value': '#value'
+            name: name
+            registrant: registrant
+            authInfo:
+              pw:
+                '@roid': '@roid'
+                '#value': '#value'
+      title: DomainCreateRequest
+    domain_addRemType:
+      properties:
+        contact:
+          items:
+            $ref: '#/components/schemas/domain_contactType'
+          minItems: 0
+          title: contact
+          type: array
+        ns:
+          $ref: '#/components/schemas/domain_nsType'
+        status:
+          items:
+            $ref: '#/components/schemas/domain_statusType'
+          maxItems: 11
+          minItems: 0
+          title: status
+          type: array
+      title: domain_addRemType
+      type: object
+    domain_authInfoChgType:
+      oneOf:
+      - $ref: '#/components/schemas/domain_authInfoChgType_oneOf'
+      - $ref: '#/components/schemas/domain_authInfoChgType_oneOf_1'
+      - $ref: '#/components/schemas/domain_authInfoChgType_oneOf_2'
+      title: domain_authInfoChgType
+    domain_authInfoType:
+      oneOf:
+      - $ref: '#/components/schemas/domain_authInfoChgType_oneOf'
+      - $ref: '#/components/schemas/domain_authInfoChgType_oneOf_1'
+      title: domain_authInfoType
+    domain_checkNameType:
+      properties:
+        '#value':
+          maxLength: 255
+          minLength: 1
+          title: '#value'
+          type: string
+        '@avail':
+          title: '@avail'
+          type: boolean
+      title: domain_checkNameType
+      type: object
+    domain_checkType:
+      properties:
+        name:
+          $ref: '#/components/schemas/domain_checkNameType'
+        reason:
+          $ref: '#/components/schemas/eppcom_reasonType'
+      required:
+      - name
+      title: domain_checkType
+      type: object
+    domain_chgType:
+      properties:
+        authInfo:
+          $ref: '#/components/schemas/domain_authInfoChgType'
+        registrant:
+          maxLength: 16
+          minLength: 0
+          title: registrant
+          type: string
+      title: domain_chgType
+      type: object
+    domain_chkDataType:
+      properties:
+        cd:
+          items:
+            $ref: '#/components/schemas/domain_checkType'
+          minItems: 1
+          type: array
+      type: object
+    domain_clIDChgType:
+      maxLength: 16
+      minLength: 0
+      title: registrant
+      type: string
+    domain_contactAttrType:
+      enum:
+      - admin
+      - billing
+      - tech
+      type: string
+    domain_contactType:
+      example:
+        '@type': admin
+        '#value': '#value'
+      properties:
+        '#value':
+          maxLength: 16
+          minLength: 3
+          title: '#value'
+          type: string
+        '@type':
+          enum:
+          - admin
+          - billing
+          - tech
+          title: '@type'
+          type: string
+      title: domain_contactType
+      type: object
+    domain_creDataType:
+      properties:
+        crDate:
+          format: date-time
+          type: string
+        exDate:
+          format: date-time
+          type: string
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+      required:
+      - crDate
+      - name
+      type: object
+    domain_createType:
+      example:
+        period:
+          '#value': 8
+          '@unit': "y"
+        ns:
+          hostObj:
+          - null
+          - null
+        contact:
+        - '@type': admin
+          '#value': '#value'
+        - '@type': admin
+          '#value': '#value'
+        name: name
+        registrant: registrant
+        authInfo:
+          pw:
+            '@roid': '@roid'
+            '#value': '#value'
+      properties:
+        authInfo:
+          $ref: '#/components/schemas/domain_authInfoType'
+        contact:
+          items:
+            $ref: '#/components/schemas/domain_contactType'
+          minItems: 0
+          title: contact
+          type: array
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+        ns:
+          $ref: '#/components/schemas/domain_nsType'
+        period:
+          $ref: '#/components/schemas/domain_periodType'
+        registrant:
+          maxLength: 16
+          minLength: 3
+          title: eppcom_clIDType
+          type: string
+      required:
+      - authInfo
+      - name
+      title: domain_createType
+      type: object
+    domain_hostAttrType:
+      properties:
+        hostAddr:
+          items:
+            $ref: '#/components/schemas/host_addrType'
+          minItems: 0
+          title: hostAddr
+          type: array
+        hostName:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+      required:
+      - hostName
+      title: domain_hostAttrType
+      type: object
+    domain_hostsType:
+      enum:
+      - all
+      - del
+      - none
+      - sub
+      type: string
+    domain_infDataType:
+      properties:
+        authInfo:
+          $ref: '#/components/schemas/domain_authInfoType'
+        clID:
+          maxLength: 16
+          minLength: 3
+          title: eppcom_clIDType
+          type: string
+        contact:
+          items:
+            $ref: '#/components/schemas/domain_contactType'
+          minItems: 0
+          type: array
+        crDate:
+          format: date-time
+          type: string
+        crID:
+          maxLength: 16
+          minLength: 3
+          title: eppcom_clIDType
+          type: string
+        exDate:
+          format: date-time
+          type: string
+        host:
+          items:
+            $ref: '#/components/schemas/eppcom_labelType'
+          minItems: 0
+          type: array
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+        ns:
+          $ref: '#/components/schemas/domain_nsType'
+        registrant:
+          maxLength: 16
+          minLength: 3
+          title: eppcom_clIDType
+          type: string
+        roid:
+          type: string
+        status:
+          items:
+            $ref: '#/components/schemas/domain_statusType'
+          maxItems: 11
+          minItems: 0
+          type: array
+        trDate:
+          format: date-time
+          type: string
+        upDate:
+          format: date-time
+          type: string
+        upID:
+          maxLength: 16
+          minLength: 3
+          title: eppcom_clIDType
+          type: string
+      required:
+      - clID
+      - name
+      - roid
+      type: object
+    domain_infoNameType:
+      properties:
+        '#value':
+          maxLength: 255
+          minLength: 1
+          title: '#value'
+          type: string
+        '@hosts':
+          enum:
+          - all
+          - del
+          - none
+          - sub
+          title: '@hosts'
+          type: string
+      title: domain_infoNameType
+      type: object
+    domain_infoType:
+      properties:
+        authInfo:
+          $ref: '#/components/schemas/domain_authInfoType'
+        name:
+          $ref: '#/components/schemas/domain_infoNameType'
+      required:
+      - name
+      type: object
+    domain_mNameType:
+      properties:
+        name:
+          items:
+            $ref: '#/components/schemas/eppcom_labelType'
+          minItems: 1
+          type: array
+      type: object
+    domain_nsType:
+      oneOf:
+      - $ref: '#/components/schemas/domain_nsType_oneOf'
+      - $ref: '#/components/schemas/domain_nsType_oneOf_1'
+      title: domain_nsType
+    domain_pLimitType:
+      maximum: 99
+      minimum: 1
+      type: integer
+    domain_pUnitType:
+      enum:
+      - "y"
+      - m
+      type: string
+    domain_paNameType:
+      properties:
+        '#value':
+          maxLength: 255
+          minLength: 1
+          title: '#value'
+          type: string
+        '@paResult':
+          title: '@paResult'
+          type: boolean
+      title: domain_paNameType
+      type: object
+    domain_panDataType:
+      properties:
+        name:
+          $ref: '#/components/schemas/domain_paNameType'
+        paDate:
+          format: date-time
+          type: string
+        paTRID:
+          $ref: '#/components/schemas/epp_trIDType'
+      required:
+      - name
+      - paDate
+      - paTRID
+      type: object
+    domain_periodType:
+      example:
+        '#value': 8
+        '@unit': "y"
+      properties:
+        '#value':
+          maximum: 99
+          minimum: 1
+          title: '#value'
+          type: integer
+        '@unit':
+          enum:
+          - "y"
+          - m
+          title: '@unit'
+          type: string
+      title: domain_periodType
+      type: object
+    domain_renDataType:
+      properties:
+        exDate:
+          format: date-time
+          type: string
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+      required:
+      - name
+      type: object
+    domain_renewType:
+      properties:
+        curExpDate:
+          format: date
+          type: string
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+        period:
+          $ref: '#/components/schemas/domain_periodType'
+      required:
+      - curExpDate
+      - name
+      type: object
+    domain_sNameType:
+      properties:
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+      required:
+      - name
+      type: object
+    domain_statusType:
+      properties:
+        '#value':
+          title: '#value'
+          type: string
+        '@lang':
+          title: '@lang'
+          type: string
+        '@s':
+          enum:
+          - clientDeleteProhibited
+          - clientHold
+          - clientRenewProhibited
+          - clientTransferProhibited
+          - clientUpdateProhibited
+          - inactive
+          - ok
+          - pendingCreate
+          - pendingDelete
+          - pendingRenew
+          - pendingTransfer
+          - pendingUpdate
+          - serverDeleteProhibited
+          - serverHold
+          - serverRenewProhibited
+          - serverTransferProhibited
+          - serverUpdateProhibited
+          title: '@s'
+          type: string
+      title: domain_statusType
+      type: object
+    domain_statusValueType:
+      enum:
+      - clientDeleteProhibited
+      - clientHold
+      - clientRenewProhibited
+      - clientTransferProhibited
+      - clientUpdateProhibited
+      - inactive
+      - ok
+      - pendingCreate
+      - pendingDelete
+      - pendingRenew
+      - pendingTransfer
+      - pendingUpdate
+      - serverDeleteProhibited
+      - serverHold
+      - serverRenewProhibited
+      - serverTransferProhibited
+      - serverUpdateProhibited
+      type: string
+    domain_transferType:
+      properties:
+        authInfo:
+          $ref: '#/components/schemas/domain_authInfoType'
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+        period:
+          $ref: '#/components/schemas/domain_periodType'
+      required:
+      - name
+      type: object
+    domain_trnDataType:
+      properties:
+        acDate:
+          format: date-time
+          type: string
+        acID:
+          maxLength: 16
+          minLength: 3
+          title: eppcom_clIDType
+          type: string
+        exDate:
+          format: date-time
+          type: string
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+        reDate:
+          format: date-time
+          type: string
+        reID:
+          maxLength: 16
+          minLength: 3
+          title: eppcom_clIDType
+          type: string
+        trStatus:
+          $ref: '#/components/schemas/eppcom_trStatusType'
+      required:
+      - acDate
+      - acID
+      - name
+      - reDate
+      - reID
+      - trStatus
+      type: object
+    domain_updateType:
+      properties:
+        add:
+          $ref: '#/components/schemas/domain_addRemType'
+        chg:
+          $ref: '#/components/schemas/domain_chgType'
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+        rem:
+          $ref: '#/components/schemas/domain_addRemType'
+      required:
+      - name
+      type: object
+    epp_commandType:
+      allOf:
+      - properties:
+          clTRID:
+            $ref: '#/components/schemas/epp_trIDStringType'
+          extension:
+            $ref: '#/components/schemas/epp_extAnyType'
+        type: object
+      - oneOf:
+        - properties:
+            check:
+              $ref: '#/components/schemas/epp_readWriteType'
+          required:
+          - check
+          type: object
+        - properties:
+            create:
+              $ref: '#/components/schemas/epp_readWriteType'
+          required:
+          - create
+          type: object
+        - properties:
+            delete:
+              $ref: '#/components/schemas/epp_readWriteType'
+          required:
+          - delete
+          type: object
+        - properties:
+            info:
+              $ref: '#/components/schemas/epp_readWriteType'
+          required:
+          - info
+          type: object
+        - properties:
+            login:
+              $ref: '#/components/schemas/epp_loginType'
+          required:
+          - login
+          type: object
+        - properties:
+            logout:
+              default: false
+              type: boolean
+          required:
+          - logout
+          type: object
+        - properties:
+            poll:
+              $ref: '#/components/schemas/epp_pollType'
+          required:
+          - poll
+          type: object
+        - properties:
+            renew:
+              $ref: '#/components/schemas/epp_readWriteType'
+          required:
+          - renew
+          type: object
+        - properties:
+            transfer:
+              $ref: '#/components/schemas/epp_transferType'
+          required:
+          - transfer
+          type: object
+        - properties:
+            update:
+              $ref: '#/components/schemas/epp_readWriteType'
+          required:
+          - update
+          type: object
+      properties:
+        clTRID:
+          maxLength: 64
+          minLength: 3
+          title: epp_trIDStringType
+          type: string
+        extension:
+          $ref: '#/components/schemas/epp_extAnyType'
+      title: epp_commandType
+      type: object
+    epp_credsOptionsType:
+      properties:
+        lang:
+          title: lang
+          type: string
+        version:
+          $ref: '#/components/schemas/epp_versionType'
+      required:
+      - lang
+      - version
+      title: epp_credsOptionsType
+      type: object
+    epp_dcpAccessType:
+      oneOf:
+      - $ref: '#/components/schemas/epp_dcpAccessType_oneOf'
+      - $ref: '#/components/schemas/epp_dcpAccessType_oneOf_1'
+      - $ref: '#/components/schemas/domain_authInfoChgType_oneOf_2'
+      - $ref: '#/components/schemas/epp_dcpAccessType_oneOf_2'
+      - $ref: '#/components/schemas/epp_dcpAccessType_oneOf_3'
+      - $ref: '#/components/schemas/epp_dcpAccessType_oneOf_4'
+      title: epp_dcpAccessType
+    epp_dcpExpiryType:
+      oneOf:
+      - $ref: '#/components/schemas/epp_dcpExpiryType_oneOf'
+      - $ref: '#/components/schemas/epp_dcpExpiryType_oneOf_1'
+      title: epp_dcpExpiryType
+    epp_dcpOursType:
+      properties:
+        recDesc:
+          maxLength: 255
+          minLength: 1
+          title: epp_dcpRecDescType
+          type: string
+      title: epp_dcpOursType
+      type: object
+    epp_dcpPurposeType:
+      properties:
+        admin:
+          default: false
+          title: admin
+          type: boolean
+        contact:
+          default: false
+          title: contact
+          type: boolean
+        other:
+          default: false
+          title: other
+          type: boolean
+        prov:
+          default: false
+          title: prov
+          type: boolean
+      title: epp_dcpPurposeType
+      type: object
+    epp_dcpRecDescType:
+      maxLength: 255
+      minLength: 1
+      title: epp_dcpRecDescType
+      type: string
+    epp_dcpRecipientType:
+      properties:
+        other:
+          default: false
+          title: other
+          type: boolean
+        ours:
+          items:
+            $ref: '#/components/schemas/epp_dcpOursType'
+          minItems: 0
+          title: ours
+          type: array
+        public:
+          default: false
+          title: public
+          type: boolean
+        same:
+          default: false
+          title: same
+          type: boolean
+        unrelated:
+          default: false
+          title: unrelated
+          type: boolean
+      title: epp_dcpRecipientType
+      type: object
+    epp_dcpRetentionType:
+      oneOf:
+      - $ref: '#/components/schemas/epp_dcpRetentionType_oneOf'
+      - $ref: '#/components/schemas/epp_dcpRetentionType_oneOf_1'
+      - $ref: '#/components/schemas/epp_dcpRetentionType_oneOf_2'
+      - $ref: '#/components/schemas/epp_dcpAccessType_oneOf_1'
+      - $ref: '#/components/schemas/epp_dcpRetentionType_oneOf_3'
+      title: epp_dcpRetentionType
+    epp_dcpStatementType:
+      properties:
+        purpose:
+          $ref: '#/components/schemas/epp_dcpPurposeType'
+        recipient:
+          $ref: '#/components/schemas/epp_dcpRecipientType'
+        retention:
+          $ref: '#/components/schemas/epp_dcpRetentionType'
+      required:
+      - purpose
+      - recipient
+      - retention
+      title: epp_dcpStatementType
+      type: object
+    epp_dcpType:
+      properties:
+        access:
+          $ref: '#/components/schemas/epp_dcpAccessType'
+        expiry:
+          $ref: '#/components/schemas/epp_dcpExpiryType'
+        statement:
+          items:
+            $ref: '#/components/schemas/epp_dcpStatementType'
+          minItems: 1
+          title: statement
+          type: array
+      required:
+      - access
+      title: epp_dcpType
+      type: object
+    epp_eppType:
+      oneOf:
+      - $ref: '#/components/schemas/epp_eppType_oneOf'
+      - $ref: '#/components/schemas/epp_eppType_oneOf_1'
+      - $ref: '#/components/schemas/epp_eppType_oneOf_2'
+      - $ref: '#/components/schemas/epp_eppType_oneOf_3'
+      - $ref: '#/components/schemas/epp_eppType_oneOf_4'
+      title: epp_eppType
+    epp_errValueType:
+      allOf:
+      - properties:
+          '#text':
+            items:
+              type: string
+            type: array
+        type: object
+      - type: object
+      properties:
+        '#text':
+          items:
+            type: string
+          title: '#text'
+          type: array
+      title: epp_errValueType
+      type: object
+    epp_extAnyType:
+      allOf:
+      - properties: {}
+        type: object
+      - type: object
+      properties: {}
+      title: epp_extAnyType
+      type: object
+    epp_extErrValueType:
+      properties:
+        reason:
+          $ref: '#/components/schemas/epp_msgType'
+        value:
+          $ref: '#/components/schemas/epp_errValueType'
+      required:
+      - reason
+      - value
+      title: epp_extErrValueType
+      type: object
+    epp_extURIType:
+      properties:
+        extURI:
+          items:
+            format: uri
+            type: string
+          minItems: 1
+          title: extURI
+          type: array
+      title: epp_extURIType
+      type: object
+    epp_greetingType:
+      properties:
+        dcp:
+          $ref: '#/components/schemas/epp_dcpType'
+        svDate:
+          format: date-time
+          title: svDate
+          type: string
+        svID:
+          maxLength: 64
+          minLength: 3
+          title: epp_sIDType
+          type: string
+        svcMenu:
+          $ref: '#/components/schemas/epp_svcMenuType'
+      required:
+      - dcp
+      - svDate
+      - svID
+      - svcMenu
+      title: epp_greetingType
+      type: object
+    epp_loginSvcType:
+      properties:
+        objURI:
+          items:
+            format: uri
+            type: string
+          minItems: 1
+          title: objURI
+          type: array
+        svcExtension:
+          $ref: '#/components/schemas/epp_extURIType'
+      title: epp_loginSvcType
+      type: object
+    epp_loginType:
+      properties:
+        clID:
+          maxLength: 16
+          minLength: 3
+          title: eppcom_clIDType
+          type: string
+        newPW:
+          maxLength: 16
+          minLength: 6
+          title: epp_pwType
+          type: string
+        options:
+          $ref: '#/components/schemas/epp_credsOptionsType'
+        pw:
+          maxLength: 16
+          minLength: 6
+          title: epp_pwType
+          type: string
+        svcs:
+          $ref: '#/components/schemas/epp_loginSvcType'
+      required:
+      - clID
+      - options
+      - pw
+      - svcs
+      title: epp_loginType
+      type: object
+    epp_mixedMsgType:
+      allOf:
+      - properties:
+          '#text':
+            items:
+              type: string
+            type: array
+          '@lang':
+            type: string
+        type: object
+      - type: object
+      properties:
+        '#text':
+          items:
+            type: string
+          title: '#text'
+          type: array
+        '@lang':
+          title: '@lang'
+          type: string
+      title: epp_mixedMsgType
+      type: object
+    epp_msgQType:
+      properties:
+        '@count':
+          title: '@count'
+          type: integer
+        '@id':
+          minLength: 1
+          title: '@id'
+          type: string
+        msg:
+          $ref: '#/components/schemas/epp_mixedMsgType'
+        qDate:
+          format: date-time
+          title: qDate
+          type: string
+      title: epp_msgQType
+      type: object
+    epp_msgType:
+      properties:
+        '#value':
+          title: '#value'
+          type: string
+        '@lang':
+          title: '@lang'
+          type: string
+      title: epp_msgType
+      type: object
+    epp_pollOpType:
+      enum:
+      - ack
+      - req
+      type: string
+    epp_pollType:
+      properties:
+        '@msgID':
+          title: '@msgID'
+          type: string
+        '@op':
+          enum:
+          - ack
+          - req
+          title: '@op'
+          type: string
+      title: epp_pollType
+      type: object
+    epp_pwType:
+      maxLength: 16
+      minLength: 6
+      title: epp_pwType
+      type: string
+    epp_readWriteType:
+      allOf:
+      - properties: {}
+        type: object
+      - type: object
+      properties: {}
+      title: epp_readWriteType
+      type: object
+    epp_responseType:
+      properties:
+        extension:
+          $ref: '#/components/schemas/epp_extAnyType'
+        msgQ:
+          $ref: '#/components/schemas/epp_msgQType'
+        resData:
+          $ref: '#/components/schemas/epp_extAnyType'
+        result:
+          items:
+            $ref: '#/components/schemas/epp_resultType'
+          minItems: 1
+          title: result
+          type: array
+        trID:
+          $ref: '#/components/schemas/epp_trIDType'
+      required:
+      - trID
+      title: epp_responseType
+      type: object
+    epp_resultCodeType:
+      enum:
+      - 1000
+      - 1001
+      - 1300
+      - 1301
+      - 1500
+      - 2000
+      - 2001
+      - 2002
+      - 2003
+      - 2004
+      - 2005
+      - 2100
+      - 2101
+      - 2102
+      - 2103
+      - 2104
+      - 2105
+      - 2106
+      - 2200
+      - 2201
+      - 2202
+      - 2300
+      - 2301
+      - 2302
+      - 2303
+      - 2304
+      - 2305
+      - 2306
+      - 2307
+      - 2308
+      - 2400
+      - 2500
+      - 2501
+      - 2502
+      maximum: 65535
+      minimum: 0
+      type: integer
+    epp_resultType:
+      allOf:
+      - properties:
+          '@code':
+            enum:
+            - 1000
+            - 1001
+            - 1300
+            - 1301
+            - 1500
+            - 2000
+            - 2001
+            - 2002
+            - 2003
+            - 2004
+            - 2005
+            - 2100
+            - 2101
+            - 2102
+            - 2103
+            - 2104
+            - 2105
+            - 2106
+            - 2200
+            - 2201
+            - 2202
+            - 2300
+            - 2301
+            - 2302
+            - 2303
+            - 2304
+            - 2305
+            - 2306
+            - 2307
+            - 2308
+            - 2400
+            - 2500
+            - 2501
+            - 2502
+            maximum: 65535
+            minimum: 0
+            type: integer
+          msg:
+            $ref: '#/components/schemas/epp_msgType'
+        required:
+        - msg
+        type: object
+      - oneOf:
+        - properties:
+            value:
+              $ref: '#/components/schemas/epp_errValueType'
+          required:
+          - value
+          type: object
+        - properties:
+            extValue:
+              $ref: '#/components/schemas/epp_extErrValueType'
+          required:
+          - extValue
+          type: object
+      properties:
+        '@code':
+          enum:
+          - 1000
+          - 1001
+          - 1300
+          - 1301
+          - 1500
+          - 2000
+          - 2001
+          - 2002
+          - 2003
+          - 2004
+          - 2005
+          - 2100
+          - 2101
+          - 2102
+          - 2103
+          - 2104
+          - 2105
+          - 2106
+          - 2200
+          - 2201
+          - 2202
+          - 2300
+          - 2301
+          - 2302
+          - 2303
+          - 2304
+          - 2305
+          - 2306
+          - 2307
+          - 2308
+          - 2400
+          - 2500
+          - 2501
+          - 2502
+          maximum: 65535
+          minimum: 0
+          title: '@code'
+          type: integer
+        msg:
+          $ref: '#/components/schemas/epp_msgType'
+      required:
+      - msg
+      title: epp_resultType
+      type: object
+    epp_sIDType:
+      maxLength: 64
+      minLength: 3
+      title: epp_sIDType
+      type: string
+    epp_svcMenuType:
+      properties:
+        lang:
+          items:
+            type: string
+          minItems: 1
+          title: lang
+          type: array
+        objURI:
+          items:
+            format: uri
+            type: string
+          minItems: 1
+          title: objURI
+          type: array
+        svcExtension:
+          $ref: '#/components/schemas/epp_extURIType'
+        version:
+          items:
+            $ref: '#/components/schemas/epp_versionType'
+          minItems: 1
+          title: version
+          type: array
+      title: epp_svcMenuType
+      type: object
+    epp_trIDStringType:
+      maxLength: 64
+      minLength: 3
+      title: epp_trIDStringType
+      type: string
+    epp_trIDType:
+      properties:
+        clTRID:
+          maxLength: 64
+          minLength: 3
+          title: epp_trIDStringType
+          type: string
+        svTRID:
+          maxLength: 64
+          minLength: 3
+          title: epp_trIDStringType
+          type: string
+      required:
+      - svTRID
+      title: epp_trIDType
+      type: object
+    epp_transferOpType:
+      enum:
+      - approve
+      - cancel
+      - query
+      - reject
+      - request
+      type: string
+    epp_transferType:
+      allOf:
+      - properties:
+          '@op':
+            enum:
+            - approve
+            - cancel
+            - query
+            - reject
+            - request
+            type: string
+        type: object
+      - type: object
+      properties:
+        '@op':
+          enum:
+          - approve
+          - cancel
+          - query
+          - reject
+          - request
+          title: '@op'
+          type: string
+      title: epp_transferType
+      type: object
+    epp_versionType:
+      enum:
+      - "1.0"
+      title: epp_versionType
+      type: string
+    eppcom_clIDType:
+      maxLength: 16
+      minLength: 3
+      title: eppcom_clIDType
+      type: string
+    eppcom_extAuthInfoType:
+      allOf:
+      - properties: {}
+        type: object
+      - type: object
+      properties: {}
+      title: eppcom_extAuthInfoType
+      type: object
+    eppcom_labelType:
+      maxLength: 255
+      minLength: 1
+      title: eppcom_labelType
+      type: string
+    eppcom_minTokenType:
+      minLength: 1
+      type: string
+    eppcom_pwAuthInfoType:
+      example:
+        '@roid': '@roid'
+        '#value': '#value'
+      properties:
+        '#value':
+          title: '#value'
+          type: string
+        '@roid':
+          title: '@roid'
+          type: string
+      title: eppcom_pwAuthInfoType
+      type: object
+    eppcom_reasonBaseType:
+      maxLength: 32
+      minLength: 1
+      type: string
+    eppcom_reasonType:
+      properties:
+        '#value':
+          maxLength: 32
+          minLength: 1
+          title: '#value'
+          type: string
+        '@lang':
+          title: '@lang'
+          type: string
+      title: eppcom_reasonType
+      type: object
+    eppcom_roidType:
+      type: string
+    eppcom_trStatusType:
+      enum:
+      - clientApproved
+      - clientCancelled
+      - clientRejected
+      - pending
+      - serverApproved
+      - serverCancelled
+      title: eppcom_trStatusType
+      type: string
+    host_addRemType:
+      properties:
+        addr:
+          items:
+            $ref: '#/components/schemas/host_addrType'
+          minItems: 0
+          title: addr
+          type: array
+        status:
+          items:
+            $ref: '#/components/schemas/host_statusType'
+          maxItems: 7
+          minItems: 0
+          title: status
+          type: array
+      title: host_addRemType
+      type: object
+    host_addrStringType:
+      maxLength: 45
+      minLength: 3
+      type: string
+    host_addrType:
+      properties:
+        '#value':
+          maxLength: 45
+          minLength: 3
+          title: '#value'
+          type: string
+        '@ip':
+          enum:
+          - v4
+          - v6
+          title: '@ip'
+          type: string
+      title: host_addrType
+      type: object
+    host_checkNameType:
+      properties:
+        '#value':
+          maxLength: 255
+          minLength: 1
+          title: '#value'
+          type: string
+        '@avail':
+          title: '@avail'
+          type: boolean
+      title: host_checkNameType
+      type: object
+    host_checkType:
+      properties:
+        name:
+          $ref: '#/components/schemas/host_checkNameType'
+        reason:
+          $ref: '#/components/schemas/eppcom_reasonType'
+      required:
+      - name
+      title: host_checkType
+      type: object
+    host_chgType:
+      properties:
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+      required:
+      - name
+      title: host_chgType
+      type: object
+    host_chkDataType:
+      properties:
+        cd:
+          items:
+            $ref: '#/components/schemas/host_checkType'
+          minItems: 1
+          type: array
+      type: object
+    host_creDataType:
+      properties:
+        crDate:
+          format: date-time
+          type: string
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+      required:
+      - crDate
+      - name
+      type: object
+    host_createType:
+      properties:
+        addr:
+          items:
+            $ref: '#/components/schemas/host_addrType'
+          minItems: 0
+          type: array
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+      required:
+      - name
+      type: object
+    host_infDataType:
+      properties:
+        addr:
+          items:
+            $ref: '#/components/schemas/host_addrType'
+          minItems: 0
+          type: array
+        clID:
+          maxLength: 16
+          minLength: 3
+          title: eppcom_clIDType
+          type: string
+        crDate:
+          format: date-time
+          type: string
+        crID:
+          maxLength: 16
+          minLength: 3
+          title: eppcom_clIDType
+          type: string
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+        roid:
+          type: string
+        status:
+          items:
+            $ref: '#/components/schemas/host_statusType'
+          maxItems: 7
+          minItems: 1
+          type: array
+        trDate:
+          format: date-time
+          type: string
+        upDate:
+          format: date-time
+          type: string
+        upID:
+          maxLength: 16
+          minLength: 3
+          title: eppcom_clIDType
+          type: string
+      required:
+      - clID
+      - crDate
+      - crID
+      - name
+      - roid
+      type: object
+    host_ipType:
+      enum:
+      - v4
+      - v6
+      type: string
+    host_mNameType:
+      properties:
+        name:
+          items:
+            $ref: '#/components/schemas/eppcom_labelType'
+          minItems: 1
+          type: array
+      type: object
+    host_paNameType:
+      properties:
+        '#value':
+          maxLength: 255
+          minLength: 1
+          title: '#value'
+          type: string
+        '@paResult':
+          title: '@paResult'
+          type: boolean
+      title: host_paNameType
+      type: object
+    host_panDataType:
+      properties:
+        name:
+          $ref: '#/components/schemas/host_paNameType'
+        paDate:
+          format: date-time
+          type: string
+        paTRID:
+          $ref: '#/components/schemas/epp_trIDType'
+      required:
+      - name
+      - paDate
+      - paTRID
+      type: object
+    host_sNameType:
+      properties:
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+      required:
+      - name
+      type: object
+    host_statusType:
+      properties:
+        '#value':
+          title: '#value'
+          type: string
+        '@lang':
+          title: '@lang'
+          type: string
+        '@s':
+          enum:
+          - clientDeleteProhibited
+          - clientUpdateProhibited
+          - linked
+          - ok
+          - pendingCreate
+          - pendingDelete
+          - pendingTransfer
+          - pendingUpdate
+          - serverDeleteProhibited
+          - serverUpdateProhibited
+          title: '@s'
+          type: string
+      title: host_statusType
+      type: object
+    host_statusValueType:
+      enum:
+      - clientDeleteProhibited
+      - clientUpdateProhibited
+      - linked
+      - ok
+      - pendingCreate
+      - pendingDelete
+      - pendingTransfer
+      - pendingUpdate
+      - serverDeleteProhibited
+      - serverUpdateProhibited
+      type: string
+    host_updateType:
+      properties:
+        add:
+          $ref: '#/components/schemas/host_addRemType'
+        chg:
+          $ref: '#/components/schemas/host_chgType'
+        name:
+          maxLength: 255
+          minLength: 1
+          title: eppcom_labelType
+          type: string
+        rem:
+          $ref: '#/components/schemas/host_addRemType'
+      required:
+      - name
+      type: object
+    DomainCreateRequest_allOf_command:
+      example:
+        create:
+          period:
+            '#value': 8
+            '@unit': "y"
+          ns:
+            hostObj:
+            - null
+            - null
+          contact:
+          - '@type': admin
+            '#value': '#value'
+          - '@type': admin
+            '#value': '#value'
+          name: name
+          registrant: registrant
+          authInfo:
+            pw:
+              '@roid': '@roid'
+              '#value': '#value'
+      properties:
+        create:
+          $ref: '#/components/schemas/domain_createType'
+      required:
+      - create
+      title: DomainCreateRequest_allOf_command
+      type: object
+    domain_authInfoChgType_oneOf:
+      example:
+        pw:
+          '@roid': '@roid'
+          '#value': '#value'
+      properties:
+        pw:
+          $ref: '#/components/schemas/eppcom_pwAuthInfoType'
+      required:
+      - pw
+      title: domain_authInfoChgType_oneOf
+      type: object
+    domain_authInfoChgType_oneOf_1:
+      properties:
+        ext:
+          $ref: '#/components/schemas/eppcom_extAuthInfoType'
+      required:
+      - ext
+      title: domain_authInfoChgType_oneOf_1
+      type: object
+    domain_authInfoChgType_oneOf_2:
+      properties:
+        "null":
+          default: false
+          title: "null"
+          type: boolean
+      required:
+      - "null"
+      title: domain_authInfoChgType_oneOf_2
+      type: object
+    domain_nsType_oneOf:
+      example:
+        hostObj:
+        - null
+        - null
+      properties:
+        hostObj:
+          items:
+            $ref: '#/components/schemas/eppcom_labelType'
+          minItems: 1
+          title: hostObj
+          type: array
+      title: domain_nsType_oneOf
+      type: object
+    domain_nsType_oneOf_1:
+      properties:
+        hostAttr:
+          items:
+            $ref: '#/components/schemas/domain_hostAttrType'
+          minItems: 1
+          title: hostAttr
+          type: array
+      title: domain_nsType_oneOf_1
+      type: object
+    epp_dcpAccessType_oneOf:
+      properties:
+        all:
+          default: false
+          title: all
+          type: boolean
+      required:
+      - all
+      title: epp_dcpAccessType_oneOf
+      type: object
+    epp_dcpAccessType_oneOf_1:
+      properties:
+        none:
+          default: false
+          title: none
+          type: boolean
+      required:
+      - none
+      title: epp_dcpAccessType_oneOf_1
+      type: object
+    epp_dcpAccessType_oneOf_2:
+      properties:
+        other:
+          default: false
+          title: other
+          type: boolean
+      required:
+      - other
+      title: epp_dcpAccessType_oneOf_2
+      type: object
+    epp_dcpAccessType_oneOf_3:
+      properties:
+        personal:
+          default: false
+          title: personal
+          type: boolean
+      required:
+      - personal
+      title: epp_dcpAccessType_oneOf_3
+      type: object
+    epp_dcpAccessType_oneOf_4:
+      properties:
+        personalAndOther:
+          default: false
+          title: personalAndOther
+          type: boolean
+      required:
+      - personalAndOther
+      title: epp_dcpAccessType_oneOf_4
+      type: object
+    epp_dcpExpiryType_oneOf:
+      properties:
+        absolute:
+          format: date-time
+          title: absolute
+          type: string
+      required:
+      - absolute
+      title: epp_dcpExpiryType_oneOf
+      type: object
+    epp_dcpExpiryType_oneOf_1:
+      properties:
+        relative:
+          format: duration
+          title: relative
+          type: string
+      required:
+      - relative
+      title: epp_dcpExpiryType_oneOf_1
+      type: object
+    epp_dcpRetentionType_oneOf:
+      properties:
+        business:
+          default: false
+          title: business
+          type: boolean
+      required:
+      - business
+      title: epp_dcpRetentionType_oneOf
+      type: object
+    epp_dcpRetentionType_oneOf_1:
+      properties:
+        indefinite:
+          default: false
+          title: indefinite
+          type: boolean
+      required:
+      - indefinite
+      title: epp_dcpRetentionType_oneOf_1
+      type: object
+    epp_dcpRetentionType_oneOf_2:
+      properties:
+        legal:
+          default: false
+          title: legal
+          type: boolean
+      required:
+      - legal
+      title: epp_dcpRetentionType_oneOf_2
+      type: object
+    epp_dcpRetentionType_oneOf_3:
+      properties:
+        stated:
+          default: false
+          title: stated
+          type: boolean
+      required:
+      - stated
+      title: epp_dcpRetentionType_oneOf_3
+      type: object
+    epp_eppType_oneOf:
+      properties:
+        greeting:
+          $ref: '#/components/schemas/epp_greetingType'
+      required:
+      - greeting
+      title: epp_eppType_oneOf
+      type: object
+    epp_eppType_oneOf_1:
+      properties:
+        hello:
+          default: false
+          title: hello
+          type: boolean
+      required:
+      - hello
+      title: epp_eppType_oneOf_1
+      type: object
+    epp_eppType_oneOf_2:
+      properties:
+        command:
+          $ref: '#/components/schemas/epp_commandType'
+      required:
+      - command
+      title: epp_eppType_oneOf_2
+      type: object
+    epp_eppType_oneOf_3:
+      properties:
+        response:
+          $ref: '#/components/schemas/epp_responseType'
+      required:
+      - response
+      title: epp_eppType_oneOf_3
+      type: object
+    epp_eppType_oneOf_4:
+      properties:
+        extension:
+          $ref: '#/components/schemas/epp_extAnyType'
+      required:
+      - extension
+      title: epp_eppType_oneOf_4
+      type: object
